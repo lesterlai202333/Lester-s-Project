@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float directionX = 0f; //setting up varaibles
 
     [SerializeField] private float speed = 7f;
-    [SerializeField] private float jumpForce = 14f;//setting up variables, the serializefield allows me to access it in the unity page to test out the optimum values
+    [SerializeField] public static float jumpForce = 14f;//setting up variables, the serializefield allows me to access it in the unity page to test out the optimum values
 
 
 
