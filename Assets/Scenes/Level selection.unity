@@ -215,7 +215,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Swamp Theme 2
+          m_StringArgument: Swamp Theme 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &23366453
@@ -583,19 +583,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 92239089}
-        m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
-        m_MethodName: LevelSelection
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Swamp Theme 1
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &360114019
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -931,7 +919,7 @@ GameObject:
   - component: {fileID: 843829465}
   - component: {fileID: 843829464}
   m_Layer: 5
-  m_Name: Level 2 icon shadow (1)
+  m_Name: In the future
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -955,8 +943,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -366, y: 177}
-  m_SizeDelta: {x: 300.893, y: 207.3}
+  m_AnchoredPosition: {x: -209.53108, y: 177}
+  m_SizeDelta: {x: 613.828, y: 207.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &843829464
 MonoBehaviour:
@@ -1356,7 +1344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lv 2
+  m_text: In development
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1365,8 +1353,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1191390727
-  m_fontColor: {r: 0.029251575, g: 0.1792453, b: 0.010991462, a: 0.2784314}
+    rgba: 3154128391
+  m_fontColor: {r: 0.029251575, g: 0.1792453, b: 0, a: 0.7372549}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1419,7 +1407,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -337.57645, y: 0, z: -324.59256, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1892,8 +1880,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1191390727
-  m_fontColor: {r: 0.029251575, g: 0.1792453, b: 0.010991462, a: 0.2784314}
+    rgba: 3305319943
+  m_fontColor: {r: 0.029251575, g: 0.1792453, b: 0.010991462, a: 0.77254903}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

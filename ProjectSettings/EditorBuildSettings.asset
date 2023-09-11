@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level selection.unity
     guid: 08957e1c7536c40189dc0f1d7bb6c4f4
   - enabled: 1
-    path: Assets/Scenes/Graveyard Theme 1.unity
+    path: Assets/Scenes/Backup of sprites.unity
     guid: 08b8d9cded71a448e9a683d2a47c98f5
   m_configObjects: {}
