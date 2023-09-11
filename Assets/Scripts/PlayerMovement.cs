@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim; //declaring the variables, as in Csharp, variables have to be declared first.
     private CapsuleCollider2D coll; // Box collider changed to CapsuleCollider2D 
     [SerializeField] private LayerMask groundLayer; //this allows the system to access and interact with another layer
-  
+
 
     private float directionX = 0f; //setting up varaibles
 
@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
@@ -47,23 +48,22 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce); //sets the velocity of the player to the x velocity that the player already has, and a constant(jumpforce)
         }
 
-       
-        
-        
-        Check();
-     
-    
-        
+
+
+
+        Check(); //constantly checks the stuff in the method
+
+
+
         UpdateAnimationState(); //constantly checks the stuff in the method (UpdateAnimationState)
-        
-       
+
+
     }
 
 
-    
-        
-    
-   
+
+
+
 
 
     //the private bool / private void / private float are ways to store data / code inside a variable. float is a number, bool is either true or false, void is a way of storing code inside a method.
@@ -84,18 +84,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Check()
+    private void Check() //this method checks for whether an attack animation is played, if it is true, the player's x velocity is set to 0, so it cannot move left/right
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
         {
-            
+
             rb.velocity = new Vector2(0, rb.velocity.y);
             rb.freezeRotation = true;
-            
+
 
         }
-        
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
 
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
             rb.freezeRotation = true;
         }
-        
+
     }
 
 
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
                 sprite.flipX = true;
             }
         }
-        
+
         MovementState state; //it declares the movementstate enum to just state as a variable, the point is that the value isn't defined, so that I can write code that sets its value
         if (directionX > 0f && IsGrounded()) //if the player moves right/left and it is grounded, the player performs a running animation
         {
@@ -157,3 +157,6 @@ public class PlayerMovement : MonoBehaviour
 
 
 }
+
+
+
