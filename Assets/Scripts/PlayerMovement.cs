@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -51,11 +52,11 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        Check(); //constantly checks the stuff in the method
+        Check(); //constantly calls the stuff in the method(newly added method)
 
 
 
-        UpdateAnimationState(); //constantly checks the stuff in the method (UpdateAnimationState)
+        UpdateAnimationState(); //constantly calls the stuff in the method (UpdateAnimationState)
 
 
     }
@@ -84,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Check() //this method checks for whether an attack animation is played, if it is true, the player's x velocity is set to 0, so it cannot move left/right
+    private void Check() //this method checks for whether an attack animation is played, if it is true, the player's x velocity is set to 0, so it cannot move left/right 
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
         {
@@ -113,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimationState()//this section controls the player movement animation transitions. 
     {
-        if (!AttackController.isAttacking)
+        if (!AttackController.isAttacking) //newly added condition, if the player is attacking, it cannot turn around, this was added to solve the issue that if the player turns around quick during an attack animation, there will be 2 areas where the player can deal damage
         {
             if (directionX > 0) //if the player moves right（positve）, the sprite wouldn't flip x（turn around）
             {
