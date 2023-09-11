@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        
+        Check(); //constantly checks the stuff in the method
 
 
 
@@ -84,13 +84,37 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    
+    private void Check() //this method checks for whether an attack animation is played, if it is true, the player's x velocity is set to 0, so it cannot move left/right
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
+        {
+
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.freezeRotation = true;
+
+
+        }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+        {
+
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.freezeRotation = true;
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 3"))
+        {
+
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.freezeRotation = true;
+        }
+
+    }
 
 
     private void UpdateAnimationState()//this section controls the player movement animation transitions. 
     {
-        
-        
+        if (!AttackController.isAttacking)
+        {
             if (directionX > 0) //if the player moves right（positve）, the sprite wouldn't flip x（turn around）
             {
                 sprite.flipX = false;
@@ -99,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 sprite.flipX = true;
             }
-        
+        }
 
         MovementState state; //it declares the movementstate enum to just state as a variable, the point is that the value isn't defined, so that I can write code that sets its value
         if (directionX > 0f && IsGrounded()) //if the player moves right/left and it is grounded, the player performs a running animation
