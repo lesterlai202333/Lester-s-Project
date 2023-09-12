@@ -7,16 +7,23 @@ public class TransitionOne : StateMachineBehaviour
     //OnStateUpdate is a callback method in Unity that gets called during each frame while the animation state is active.
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (AttackController.isAttacking) {
-            AttackController.instance.anim.Play("Attack 2"); //if the bool is true, the second attack animation is played
-
+        if (AttackController.isAttacking)
+        {
+            
+                AttackController.instance.anim.Play("Attack 2"); //if the bool is true, the second attack animation is played
+            
         }
     }
 
     //OnStateExit is a callback method that Unity calls automatically when an animation state exits, which means I can define custom behavior or actions associated with that transition, like in this case, I defined it so that after the transition ended, the bool is set to false.
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        AttackController.isAttacking = false;
+
+
+        
+            AttackController.isAttacking = false;
+
+       
         //sets the Isattacking variable in the attackcontroller script to false
     }
     //the list of parameters in the brackets provide the information, so that I don't have to declare them and access their data myself

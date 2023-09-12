@@ -10,13 +10,13 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim; //declaring the variables, as in Csharp, variables have to be declared first.
     private CapsuleCollider2D coll; // Box collider changed to CapsuleCollider2D 
     [SerializeField] private LayerMask groundLayer; //this allows the system to access and interact with another layer
-
+    public GameObject GameOverCanvas;
 
     private float directionX = 0f; //setting up varaibles
 
     [SerializeField] private float speed = 7f;
     [SerializeField] public static float jumpForce = 14f;//setting up variables, the serializefield allows me to access it in the unity page to test out the optimum values
-
+    public static bool isjumping;
 
 
 
@@ -40,16 +40,23 @@ public class PlayerMovement : MonoBehaviour
             float slopeAngle = GetSlopeAngle(); //sets the slopeangle variable to the value got from the GetSlopeAngle method.
             slopeFactor = Mathf.Cos(slopeAngle * Mathf.Deg2Rad); //converts it to a ratio
         }
-        rb.velocity = new Vector2(directionX * speed * slopeFactor, rb.velocity.y);
+
+        if (!GameOver.dead)
+        {
+            rb.velocity = new Vector2(directionX * speed * slopeFactor, rb.velocity.y);
+        }
+
+        
+        
         //so if the player is grounded, it calculates the slopeangle with the previous method, then the slope angle is changed to that value, and is converted to degrees which is usable, the slope factor makes the thing a ratio which is used in the rb.velocity. This makes the player move at different rates when it runs over bumps.
 
 
-        if (Input.GetButtonDown("Jump") && IsGrounded()) //checks that space is pressed, and that the player is grounded.
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !GameOver.dead) //checks that space is pressed, and that the player is grounded.
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce); //sets the velocity of the player to the x velocity that the player already has, and a constant(jumpforce)
+            
         }
-
-
+        
 
 
         Check(); //constantly calls the stuff in the method(newly added method)
@@ -87,34 +94,53 @@ public class PlayerMovement : MonoBehaviour
 
     private void Check() //this method checks for whether an attack animation is played, if it is true, the player's x velocity is set to 0, so it cannot move left/right 
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
-        {
-
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            rb.freezeRotation = true;
-
-
-        }
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !isjumping)
         {
 
             rb.velocity = new Vector2(0, rb.velocity.y);
             rb.freezeRotation = true;
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 3"))
+       
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2") && !isjumping)
         {
 
             rb.velocity = new Vector2(0, rb.velocity.y);
             rb.freezeRotation = true;
+        }
+      
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 3") && !isjumping)
+        {
+
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.freezeRotation = true;
+        }
+
+        if (HealthManager.playerHealth <= 0)
+        {
+
+            die();
+
         }
 
     }
+    void die()
+    {
+        anim.Play("HeroKnight_Death");
+        rb.bodyType = RigidbodyType2D.Static;
+    }
 
+    private void Gameover() //when the game is over, the time is set to 0, and the game over canvas is set to true so that it shows, 
+    {
+        GameOverCanvas.SetActive(true);
+        GameOver.dead = true;
+        Time.timeScale = 0f;
+        InGamePauseMenu.Paused = true; //static bool usage, we are accessing the boolean value from another script and changing it
+
+    }
 
     private void UpdateAnimationState()//this section controls the player movement animation transitions. 
     {
-        if (!AttackController.isAttacking) //newly added condition, if the player is attacking, it cannot turn around, this was added to solve the issue that if the player turns around quick during an attack animation, there will be 2 areas where the player can deal damage
+        if (!AttackController.isAttacking && !GameOver.dead) //newly added condition, if the player is attacking, it cannot turn around, this was added to solve the issue that if the player turns around quick during an attack animation, there will be 2 areas where the player can deal damage
         {
             if (directionX > 0) //if the player moves right（positve）, the sprite wouldn't flip x（turn around）
             {
@@ -127,30 +153,35 @@ public class PlayerMovement : MonoBehaviour
         }
 
         MovementState state; //it declares the movementstate enum to just state as a variable, the point is that the value isn't defined, so that I can write code that sets its value
-        if (directionX > 0f && IsGrounded()) //if the player moves right/left and it is grounded, the player performs a running animation
+        if (!GameOver.dead)
         {
-            state = MovementState.running;
+            if (directionX > 0f && IsGrounded()) //if the player moves right/left and it is grounded, the player performs a running animation
+            {
+                state = MovementState.running;
+                isjumping = false;
+            }
+            else if (directionX < 0f && IsGrounded())
+            {
+                state = MovementState.running;
+                isjumping = false;
+            }
+            else if (rb.velocity.y > 0.1f) //if the y velocity of the player >0.1, the player performs a jumping animation, or else it performs a falling. .1 is used instead of 0 is because the animations for falling/jumping might be triggered when the player moves slightly upwards
+            {
+                state = MovementState.jumping;
+                isjumping = true;
+            }
+            else if (rb.velocity.y < -0.1f)
+            {
+                state = MovementState.falling;
+                isjumping = true;
+            }
+            else //otherwise the player persforms the idle animation
+            {
+                state = MovementState.idle;
+            }
 
+            anim.SetInteger("state", (int)state); //it sets the integer value of a parameter in the animator
         }
-        else if (directionX < 0f && IsGrounded())
-        {
-            state = MovementState.running;
-
-        }
-        else if (rb.velocity.y > 0.1f) //if the y velocity of the player >0.1, the player performs a jumping animation, or else it performs a falling. .1 is used instead of 0 is because the animations for falling/jumping might be triggered when the player moves slightly upwards
-        {
-            state = MovementState.jumping;
-        }
-        else if (rb.velocity.y < -0.1f)
-        {
-            state = MovementState.falling;
-        }
-        else //otherwise the player persforms the idle animation
-        {
-            state = MovementState.idle;
-        }
-
-        anim.SetInteger("state", (int)state); //it sets the integer value of a parameter in the animator
     }
 
     private enum MovementState { idle, running, jumping, falling }//enums are used to represent a fixed set of named constants with specific meaning
@@ -158,6 +189,3 @@ public class PlayerMovement : MonoBehaviour
 
 
 }
-
-
-
