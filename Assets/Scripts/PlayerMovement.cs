@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -131,11 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Gameover() //when the game is over, the time is set to 0, and the game over canvas is set to true so that it shows, 
     {
-        GameOverCanvas.SetActive(true);
-        GameOver.dead = true;
-        Time.timeScale = 0f;
-        InGamePauseMenu.Paused = true; //static bool usage, we are accessing the boolean value from another script and changing it
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void UpdateAnimationState()//this section controls the player movement animation transitions. 
@@ -186,6 +183,10 @@ public class PlayerMovement : MonoBehaviour
 
     private enum MovementState { idle, running, jumping, falling }//enums are used to represent a fixed set of named constants with specific meaning
 
+    //GameOverCanvas.SetActive(true);
+    //GameOver.dead = true;
+        //Time.timeScale = 0f;
+        //InGamePauseMenu.Paused = true; //static bool usage, we are accessing the boolean value from another script and changing it
 
 
 }
