@@ -20,10 +20,11 @@ public class TransitionOne : StateMachineBehaviour
     {
 
 
-        
-            AttackController.isAttacking = false;
-
+     
+        AttackController.isAttacking = false;
        
+
+
         //sets the Isattacking variable in the attackcontroller script to false
     }
     //the list of parameters in the brackets provide the information, so that I don't have to declare them and access their data myself

@@ -8,8 +8,8 @@ public class AttackController : MonoBehaviour
     public Rigidbody2D rb;
     public static bool isAttacking = false; //static so that this variable can be accessed outside of this script.
     public static AttackController instance;
-    public static float cooldowntimer = 0;
-
+   public static float attackCD = 0;
+  
 
     // Start is called before the first frame update
     private void Awake() //Awake is called when the script object is initialised, regardless of whether or not the script is enabled. 
@@ -21,28 +21,36 @@ public class AttackController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>(); //getting the info from the components of the object that this attacktroller script is attached to.
-
+     
     }
     void Update() //constantly calls the attack method
     {
-
+        if (attackCD > 0)
+        {
+            attackCD -= Time.deltaTime;
+        }
         Attack();
-        
-        
+       
+
 
 
     }
     void Attack() //if the player left clicks and that isattacking bool is false, the isattacking bool is set to true.
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking && cooldowntimer <= 0 && !GameOver.dead)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking && !GameOver.dead && attackCD <= 0)
         {
             isAttacking = true;
 
         }
+
     }
 
    
 }
+
+
+
+
 
 // && GameOver.dead == false
 

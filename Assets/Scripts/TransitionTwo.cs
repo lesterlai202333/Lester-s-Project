@@ -10,11 +10,11 @@ public class TransitionTwo : StateMachineBehaviour
         if (AttackController.isAttacking)
         {
             AttackController.instance.anim.Play("Attack 3"); //if the bool is true, the second attack animation is played
-
+   
         }
     }
 
-   
+
     //the list of parameters in the brackets provide the information, so that I don't have to declare them and access their data myself
     //public means that this method can be accessed by any other class or scripts
     //void means that it doesn't return a value

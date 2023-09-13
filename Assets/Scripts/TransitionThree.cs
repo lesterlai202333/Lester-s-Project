@@ -9,7 +9,8 @@ public class TransitionThree : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         AttackController.isAttacking = false; //sets the Isattacking variable in the attackcontroller script to false
-     
+
+        AttackController.attackCD = 1f;
 
     }
     //the list of parameters in the brackets provide the information, so that I don't have to declare them and access their data myself
