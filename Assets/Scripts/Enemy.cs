@@ -6,34 +6,29 @@ public class Enemy : MonoBehaviour
 {
     private float health;
     // Start is called before the first frame update
-    private Animator anim;
+    private Animator anim; //declaring variables
     void Start()
     {
         health = 100f;
-        anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>(); //accessing the animator component and setting the enemy initial health to 100
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void EnemyTakeDamage (float damageEnemy)
     {
         
         
-           health -= damageEnemy;
+           health -= damageEnemy; //health - damage
         
            if (health <= 0)
         {
-            Die();
+            Die(); //if health reach 0 it calls this function
             
         }
         
     }
 
-    private void Die()
+    private void Die() //the death trigger is triggered so the enemy goblin performs the death animation
     {
         anim.SetTrigger("death");
         Debug.Log("enemy died");
@@ -43,6 +38,6 @@ public class Enemy : MonoBehaviour
 
     public void vanish()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); //the goblin gets destroyed so that it doesn't exist in the scene anymore
     }
 }

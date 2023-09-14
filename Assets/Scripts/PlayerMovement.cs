@@ -119,27 +119,15 @@ public class PlayerMovement : MonoBehaviour
             rb.freezeRotation = true;
         }
 
-        if (HealthManager.playerHealth <= 0) //if player health drops below 0, the player dies, and the scene restarts
-        {
-
-            die();
-
-        }
+        
 
     }
-    void die() //death method
-    {
-        anim.Play("HeroKnight_Death");
-        rb.bodyType = RigidbodyType2D.Static;
-    }
+    
 
  
 
 
-    private void Gameover() //after the player dies, the scene is reset
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    
 
     private void UpdateAnimationState()//this section controls the player movement animation transitions. 
     {

@@ -5,25 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Graveyard Theme.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: db168be5e4f5c48749ef28975d67c816
   - enabled: 1
-    path: Assets/Scenes/Swamp Theme 2.unity
-    guid: 7b3f10a8b6a9e4b1c9dae7822ce5ad8b
-  - enabled: 1
-    path: Assets/Scenes/Swamp Theme 1.unity
-    guid: 41b29982302bc4997b7b0925a003b8aa
-  - enabled: 1
-    path: Assets/Scenes/Graveyard Theme 2.unity
-    guid: 6bd44668b0ec0424ca7a7a0cc62ff875
-  - enabled: 1
     path: Assets/Scenes/Level selection.unity
     guid: 08957e1c7536c40189dc0f1d7bb6c4f4
+  - enabled: 0
+    path: Assets/Scenes/Swamp Theme 2.unity
+    guid: 4eff759c6dc8e4eb696014da336e71d2
   - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 8568037a8fa114dbf8f246f004d30f52
+  - enabled: 0
+    path: Assets/Scenes/Graveyard Theme 2.unity
+    guid: 6bd44668b0ec0424ca7a7a0cc62ff875
+  - enabled: 0
     path: Assets/Scenes/Backup of sprites.unity
     guid: 08b8d9cded71a448e9a683d2a47c98f5
   m_configObjects: {}
