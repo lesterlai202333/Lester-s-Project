@@ -11,16 +11,17 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim; //declaring the variables, as in Csharp, variables have to be declared first.
     private CapsuleCollider2D coll; // Box collider changed to CapsuleCollider2D 
     [SerializeField] private LayerMask groundLayer; //this allows the system to access and interact with another layer
-    public GameObject GameOverCanvas;
+ 
 
     private float directionX = 0f; //setting up varaibles
 
     [SerializeField] private float speed = 7f;
     [SerializeField] public static float jumpForce = 14f;//setting up variables, the serializefield allows me to access it in the unity page to test out the optimum values
     public static bool isjumping;
- 
 
 
+    [SerializeField] private AudioSource jumpsoundEffects;
+   
 
 
     private void Start()
@@ -55,15 +56,14 @@ public class PlayerMovement : MonoBehaviour
         //so if the player is grounded, it calculates the slopeangle with the previous method, then the slope angle is changed to that value, and is converted to degrees which is usable, the slope factor makes the thing a ratio which is used in the rb.velocity. This makes the player move at different rates when it runs over bumps.
 
 
-        if (Input.GetButtonDown("Jump") && IsGrounded()) //checks that space is pressed, and that the player is grounded.
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !DeathCanvas.deaths) //checks that space is pressed, and that the player is grounded.
         {
+            jumpsoundEffects.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce); //sets the velocity of the player to the x velocity that the player already has, and a constant(jumpforce)
             
         }
         
 
-
-        Check(); //constantly calls the stuff in the method(newly added method)
 
 
 
@@ -96,33 +96,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Check() //this method checks for whether an attack animation is played, if it is true, the player's x velocity is set to 0, so it cannot move left/right 
-    {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !isjumping)
-        {
-
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            rb.freezeRotation = true;
-        }
-       
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2") && !isjumping)
-        {
-
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            rb.freezeRotation = true;
-        }
-      
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 3") && !isjumping)
-        {
-
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            rb.freezeRotation = true;
-        }
-
-        
-
-    }
-    
+   
 
  
 
@@ -131,8 +105,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimationState()//this section controls the player movement animation transitions. 
     {
-        if (!AttackController.isAttacking) //newly added condition, if the player is attacking, it cannot turn around, this was added to solve the issue that if the player turns around quick during an attack animation, there will be 2 areas where the player can deal damage
-        {
+       
+        
             if (directionX > 0) //if the player moves right（positve）, the sprite wouldn't flip x（turn around）
             {
                 sprite.flipX = false;
@@ -141,18 +115,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 sprite.flipX = true;
             }
-        }
+        
 
         MovementState state; //it declares the movementstate enum to just state as a variable, the point is that the value isn't defined, so that I can write code that sets its value
-       
+        if (!DeathCanvas.deaths)
+        {
+
+
             if (directionX > 0f && IsGrounded()) //if the player moves right/left and it is grounded, the player performs a running animation
             {
                 state = MovementState.running;
+               
                 isjumping = false;
             }
             else if (directionX < 0f && IsGrounded())
             {
                 state = MovementState.running;
+             
                 isjumping = false;
             }
             else if (rb.velocity.y > 0.1f) //if the y velocity of the player >0.1, the player performs a jumping animation, or else it performs a falling. .1 is used instead of 0 is because the animations for falling/jumping might be triggered when the player moves slightly upwards
@@ -171,6 +150,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
             anim.SetInteger("state", (int)state); //it sets the integer value of a parameter in the animator
+        }
+        
         
     }
 

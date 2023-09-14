@@ -44,27 +44,27 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: 
+  - name: Terrain(chapter 1)
     uniqueID: 474808669
     locked: 0
-  - name: background trees
+  - name: over
     uniqueID: 3128123419
     locked: 0
-  - name: tombs
+  - name: traps
     uniqueID: 1001201731
     locked: 0
-  - name: Terrain(chapter 1)
+  - name: player
     uniqueID: 1991644801
     locked: 0
-  - name: background plants
+  - name: 
     uniqueID: 2366999423
     locked: 0
-  - name: Swamp
+  - name: 
     uniqueID: 1823092287
     locked: 0
-  - name: player
+  - name: 
     uniqueID: 292857541
     locked: 0
-  - name: New Layer 8
+  - name: 
     uniqueID: 2117740151
     locked: 0
