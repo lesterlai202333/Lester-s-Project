@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Backup of sprites.unity
     guid: 08b8d9cded71a448e9a683d2a47c98f5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level 2.unity
-    guid: 061b730da08124156bcdeb312912ce7f
+    guid: 8d4892dbabf284ad585d0c66283b5028
   m_configObjects: {}
