@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool isjumping;
 
 
-    [SerializeField] private AudioSource jumpsoundEffects;
+    [SerializeField] private AudioSource jumpsoundEffects; //this provides the way for uinty to access the audiosource component
    
 
 
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         //so if the player is grounded, it calculates the slopeangle with the previous method, then the slope angle is changed to that value, and is converted to degrees which is usable, the slope factor makes the thing a ratio which is used in the rb.velocity. This makes the player move at different rates when it runs over bumps.
 
 
-        if (Input.GetButtonDown("Jump") && IsGrounded() && !DeathCanvas.deaths) //checks that space is pressed, and that the player is grounded.
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !DeathCanvas.deaths) //checks that space is pressed, and that the player is grounded, and that the player is alive
         {
             jumpsoundEffects.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce); //sets the velocity of the player to the x velocity that the player already has, and a constant(jumpforce)
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         
 
         MovementState state; //it declares the movementstate enum to just state as a variable, the point is that the value isn't defined, so that I can write code that sets its value
-        if (!DeathCanvas.deaths)
+        if (!DeathCanvas.deaths) //checks that the player is not dead
         {
 
 
