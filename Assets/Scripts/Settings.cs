@@ -8,7 +8,7 @@ public class Settings : MonoBehaviour
     public GameObject AudioPage;
     public GameObject GameplayPage;
     public GameObject GraphicsPage;
-    
+    [SerializeField] private AudioSource tabeffects;
     public GameObject PlayercontrolPage; //declares the variables, and in unity editor, there will be fields that I can assign these variables to the actual gameobjects therefore acquiring their data
     void Start()
     {
@@ -22,6 +22,7 @@ public class Settings : MonoBehaviour
     }
     public void AudioPageOn()//this function sets the audio page active and all the other inactive.
     {
+        tabeffects.Play();
         AudioPage.SetActive(true);
         GameplayPage.SetActive(false);
         GraphicsPage.SetActive(false);
@@ -31,6 +32,7 @@ public class Settings : MonoBehaviour
 
     public void GameplayPageOn()//this function sets the Gameplay active and all the other inactive.
     {
+        tabeffects.Play();
         AudioPage.SetActive(false);
         GameplayPage.SetActive(true);
         GraphicsPage.SetActive(false);
@@ -40,6 +42,7 @@ public class Settings : MonoBehaviour
 
     public void GraphicsPageOn()//this function sets the graphics page active and all the other inactive.
     {
+        tabeffects.Play();
         AudioPage.SetActive(false);
         GameplayPage.SetActive(false);
         GraphicsPage.SetActive(true);
@@ -49,6 +52,7 @@ public class Settings : MonoBehaviour
 
     public void PlayercontrolPageOn() //this function sets the player control page active, and all the other pages inactive.
     {
+        tabeffects.Play(); //sound effect added
         AudioPage.SetActive(false);
         GameplayPage.SetActive(false);
         GraphicsPage.SetActive(false);

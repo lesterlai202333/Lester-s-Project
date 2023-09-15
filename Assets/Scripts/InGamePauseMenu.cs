@@ -9,7 +9,7 @@ public class InGamePauseMenu : MonoBehaviour
     public GameObject PauseMenuCanvas;
     public GameObject SettingsCanvas;
     public GameObject AudioPage; //declares the variables, and in unity editor, there will be fields that I can assign these variables to the actual gameobjects therefore acquiring their data
-
+    [SerializeField] AudioSource sound;
     void Start()
     {
         Time.timeScale = 1f;
@@ -34,6 +34,7 @@ public class InGamePauseMenu : MonoBehaviour
     }
     void Stop() //defines what "pause" is 
     {
+        sound.Play();
         PauseMenuCanvas.SetActive(true); //the pause canvas is active
         Time.timeScale = 0f; //time is paused
         Paused = true; //the game is paused
@@ -41,6 +42,7 @@ public class InGamePauseMenu : MonoBehaviour
     }
     public void Play()
     {
+        sound.Play();
         PauseMenuCanvas.SetActive(false); //pause canvas is inactive
         Time.timeScale = 1f; //time is resumed
         Paused = false; //game is not pasued
@@ -49,12 +51,14 @@ public class InGamePauseMenu : MonoBehaviour
 
     public void MainMenuButton()
     {
+        sound.Play();
         SceneManager.LoadScene("MainMenu"); //when the button is pressed it switches the scene to the main menu
         
     }
 
     public void Settings() //when the settings button is pressed, time is set to 0, the audiopage is set as the default active page, the pause canvas is set inactive
     {
+        sound.Play();
         Time.timeScale = 0f;
         PauseMenuCanvas.SetActive(false);
         SettingsCanvas.SetActive(true);
@@ -64,6 +68,7 @@ public class InGamePauseMenu : MonoBehaviour
 
     public void BackToPauseMenu() //provides a way for the player to go back to the pause menu from the settings page.
     {
+        sound.Play();
         Time.timeScale = 0f;
         PauseMenuCanvas.SetActive(true); //sets the pause menu canvas active and deactivates the settings canvas
         SettingsCanvas.SetActive(false);
